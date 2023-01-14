@@ -1,7 +1,6 @@
 import Image from 'next/image';
 
 const HomePage = ({ games }) => {
-  console.log(games);
   return (
     <>
       <div className='mb-4 bg-zinc-900 p-4 rounded-lg'>
