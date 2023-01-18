@@ -1,9 +1,15 @@
 import Image from 'next/image';
-import { HiChevronLeft, HiChevronRight, HiMinusSm, HiPlusSm } from 'react-icons/hi';
+import { HiMinusSm, HiPlusSm } from 'react-icons/hi';
 import SectionTitle from '../utils/SectionTitle';
+import { useCartContext } from '../context/CartContext';
 
 const GamePage = ({ game }) => {
-  console.log(game);
+  const { cartProducts, setCartProducts } = useCartContext();
+
+  const addItemToCart = (game) => {
+    setCartProducts([...cartProducts, game]);
+  };
+
   return (
     <section>
       <SectionTitle text={game.title} />
@@ -18,11 +24,9 @@ const GamePage = ({ game }) => {
       />
 
       <h2 className='mt-4 text-sm font-bold uppercase text-zinc-400'>Description</h2>
-      <p className='mt-2'>{game.description}</p>
+      <p className='mt-2 mb-20'>{game.description}</p>
 
-      <p className='mt-4 text-2xl text-zinc-500'>$ {game.price}</p>
-
-      <div className='flex items-center justify-between mt-4 bg-[#111] h-14 px-3 rounded-lg'>
+      {/* <div className='flex items-center justify-between mt-4 bg-[#111] h-14 px-3 rounded-lg'>
         <p className='text-sm'>Quantity: 1</p>
         <div className='flex items-center gap-4'>
           <button className='p-2 bg-black rounded-lg'>
@@ -32,10 +36,18 @@ const GamePage = ({ game }) => {
             <HiPlusSm />
           </button>
         </div>
+      </div> */}
+      <div className='fixed inset-x-0 bottom-0 flex items-center justify-between h-20 p-4 border-t-2 rounded-t-xl bg-zinc-100 border-zinc-900'>
+        <div>
+          <p className='text-xs font-semibold text-zinc-400'>{game.title}</p>
+          <p className='text-2xl text-[#111] font-bold'>$ {game.price}</p>
+        </div>
+        <button
+          onClick={() => addItemToCart(game)}
+          className='px-12 py-4 text-sm font-extrabold bg-black rounded-lg text-zinc-100'>
+          Buy
+        </button>
       </div>
-      <button className='w-full mt-4 text-sm font-black text-[#111] uppercase bg-gray-200 rounded-lg h-14'>
-        Buy now
-      </button>
     </section>
   );
 };

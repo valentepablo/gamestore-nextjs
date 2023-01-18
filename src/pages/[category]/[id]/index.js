@@ -1,5 +1,5 @@
-import { db } from '../../../firebase/clientApp';
-import { collection, doc, getDocs } from 'firebase/firestore';
+import { db } from '../../../../firebase/clientApp';
+import { collection, getDocs } from 'firebase/firestore';
 import Head from 'next/head';
 import GamePage from '@/components/game/GamePage';
 
@@ -36,7 +36,6 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  console.log(params);
   const response = await getDocs(collection(db, 'items'));
   const data = response.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
   const game = data.find((game) => game.title.toLowerCase().split(' ').join('-') === params.id);

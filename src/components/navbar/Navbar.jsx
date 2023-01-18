@@ -51,11 +51,11 @@ const Navbar = () => {
 
           <ul className='px-4'>
             <Link href='/' onClick={() => setOpen((open) => !open)}>
-              <li className='pt-6 pb-3 flex items-center gap-4'>
-                <span className='text-zinc-400 text-lg border-2 rounded-lg p-2 border-zinc-900'>
+              <li className='flex items-center gap-4 pt-6 pb-3'>
+                <span className='p-2 text-lg border-2 rounded-lg text-zinc-400 border-zinc-900'>
                   {homeIcon}
                 </span>
-                <span className='tracking-wider text-sm uppercase font-bold'>Home</span>
+                <span className='text-sm font-bold tracking-wider uppercase'>Home</span>
               </li>
             </Link>
 
@@ -64,11 +64,11 @@ const Navbar = () => {
                 href={`/${category.categoryName}`}
                 onClick={() => setOpen((open) => !open)}
                 key={category.categoryName}>
-                <li className='py-3 flex items-center gap-4'>
-                  <span className='text-zinc-400 text-lg border-2 rounded-lg p-2 border-zinc-900'>
+                <li className='flex items-center gap-4 py-3'>
+                  <span className='p-2 text-lg border-2 rounded-lg text-zinc-400 border-zinc-900'>
                     {categoryIcons[`${category.categoryName}`]}
                   </span>
-                  <span className='tracking-wider text-sm uppercase font-bold'>
+                  <span className='text-sm font-bold tracking-wider uppercase'>
                     {category.categoryName}
                   </span>
                 </li>
@@ -78,8 +78,9 @@ const Navbar = () => {
 
           <div className='px-4 pt-4'>
             <Link
+              onClick={() => setOpen((open) => !open)}
               href='/cart'
-              className='flex items-center justify-center gap-2 border-2 border-zinc-900 py-4 rounded-lg w-full tracking-wider text-sm uppercase font-bold'>
+              className='flex items-center justify-center w-full gap-2 py-4 text-sm font-bold tracking-wider uppercase border-2 rounded-lg border-zinc-900'>
               <span className='text-lg'>{cartIcon}</span>
               <span>cart</span>
             </Link>
