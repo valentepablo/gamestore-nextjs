@@ -1,10 +1,22 @@
 import { db } from '../../firebase/clientApp';
 import { collection, getDocs } from 'firebase/firestore';
-
 import Head from 'next/head';
 import HomePage from '../components/home/HomePage';
 
-export default function Home({ games }) {
+type Game = {
+  title: string;
+  description: string;
+  category: string;
+  pictureUrl: string;
+  price: number;
+  stock: number;
+};
+
+interface Props {
+  games: Game[];
+}
+
+const Home = ({ games }: Props) => {
   return (
     <>
       <Head>
@@ -16,7 +28,9 @@ export default function Home({ games }) {
       <HomePage games={games} />
     </>
   );
-}
+};
+
+export default Home;
 
 export const getStaticProps = async () => {
   const response = await getDocs(collection(db, 'items'));

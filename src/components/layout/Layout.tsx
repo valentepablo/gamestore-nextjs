@@ -3,7 +3,11 @@ import { Nunito } from '@next/font/google';
 
 const nunito = Nunito({ subsets: ['latin'] });
 
-const Layout = ({ children }) => {
+interface Props {
+  children: any;
+}
+
+const Layout = ({ children }: Props) => {
   return (
     <div className={nunito.className}>
       <Navbar />

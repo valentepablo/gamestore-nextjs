@@ -1,6 +1,19 @@
 import Image from 'next/image';
 
-const CartContainer = ({ products }) => {
+export type Product = {
+  title: string;
+  description: string;
+  pictureUrl: string;
+  price: number;
+  stock: number;
+  id: string;
+};
+
+interface Props {
+  products: Product[];
+}
+
+const CartContainer = ({ products }: Props) => {
   return (
     <>
       <h2 className='mb-2 text-lg font-bold text-zinc-400'>Shopping Cart</h2>
@@ -34,7 +47,7 @@ const CartContainer = ({ products }) => {
         <div>
           <p>Total price:</p>
           <p className='text-xl font-bold text-zinc-300'>
-            $ {products.reduce((prev, current) => prev + current.price, 0)}
+            $ {products.reduce((prev: any, current: any) => prev + current.price, 0)}
           </p>
         </div>
         <button className='px-12 py-4 text-sm font-extrabold text-[#111] bg-white rounded-lg'>

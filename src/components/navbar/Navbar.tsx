@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { db } from '../../../firebase/clientApp';
 import { collection, getDocs } from 'firebase/firestore';
-import { homeIcon, categoryIcons, cartIcon } from '@/components/utils/categoryIcons';
+import { homeIcon, categoryIcons, cartIcon } from '../utils/categoryIcons';
 import { HiChevronRight } from 'react-icons/hi';
 
 const Navbar = () => {
@@ -52,9 +52,7 @@ const Navbar = () => {
           <ul className='px-4'>
             <Link href='/' onClick={() => setOpen((open) => !open)}>
               <li className='flex items-center gap-4 pt-6 pb-3'>
-                <span className='p-2 text-lg border-2 rounded-lg text-zinc-400 border-zinc-900'>
-                  {homeIcon}
-                </span>
+                <span className='p-2 text-xl rounded-lg bg-white text-[#111]'>{homeIcon}</span>
                 <span className='text-sm font-bold tracking-wider uppercase'>Home</span>
               </li>
             </Link>
@@ -65,7 +63,7 @@ const Navbar = () => {
                 onClick={() => setOpen((open) => !open)}
                 key={category.categoryName}>
                 <li className='flex items-center gap-4 py-3'>
-                  <span className='p-2 text-lg border-2 rounded-lg text-zinc-400 border-zinc-900'>
+                  <span className='p-2 text-xl bg-white rounded-lg text-[#111]'>
                     {categoryIcons[`${category.categoryName}`]}
                   </span>
                   <span className='text-sm font-bold tracking-wider uppercase'>
@@ -80,9 +78,9 @@ const Navbar = () => {
             <Link
               onClick={() => setOpen((open) => !open)}
               href='/cart'
-              className='flex items-center justify-center w-full gap-2 py-4 text-sm font-bold tracking-wider uppercase border-2 rounded-lg border-zinc-900'>
+              className='flex items-center justify-center w-full gap-2 py-4 text-sm font-extrabold text-[#111] tracking-wider bg-white rounded-lg'>
               <span className='text-lg'>{cartIcon}</span>
-              <span>cart</span>
+              <span>Cart</span>
             </Link>
           </div>
         </div>

@@ -1,9 +1,10 @@
-import { db } from '../../../../firebase/clientApp';
+import { db } from '../../../firebase/clientApp';
 import { collection, getDocs } from 'firebase/firestore';
-import Head from 'next/head';
-import GamePage from '@/components/game/GamePage';
 
-const Game = ({ game }) => {
+import Head from 'next/head';
+import CategoryPage from '../../components/category/CategoryPage';
+
+const Category = ({ categoryGames, category }) => {
   return (
     <>
       <Head>
@@ -12,22 +13,19 @@ const Game = ({ game }) => {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-
-      <GamePage game={game} />
+      <CategoryPage data={categoryGames} category={category} />
     </>
   );
 };
 
-export default Game;
+export default Category;
 
 export const getStaticPaths = async () => {
-  const response = await getDocs(collection(db, 'items'));
+  const response = await getDocs(collection(db, 'categories'));
   const data = response.docs.map((doc) => doc.data());
-  const paths = data.map((item) => {
-    return {
-      params: { category: item.category, id: item.title.toLowerCase().split(' ').join('-') },
-    };
-  });
+  const paths = data.map((item) => ({
+    params: { category: item.categoryName },
+  }));
 
   return {
     paths,
@@ -35,13 +33,13 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async (context) => {
+  const category = context.params.category;
   const response = await getDocs(collection(db, 'items'));
   const data = response.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-  const game = data.find((game) => game.title.toLowerCase().split(' ').join('-') === params.id);
+  const categoryGames = data.filter((game) => game.category === category);
+
   return {
-    props: {
-      game,
-    },
+    props: { categoryGames, category },
   };
 };
