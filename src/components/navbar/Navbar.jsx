@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { db } from '../../../firebase/clientApp';
 import { collection, getDocs } from 'firebase/firestore';
-import { homeIcon, categoryIcons, cartIcon } from '@/utils/categoryIcons';
+import { homeIcon, categoryIcons, cartIcon } from '@/components/utils/categoryIcons';
 import { HiChevronRight } from 'react-icons/hi';
 
 const Navbar = () => {

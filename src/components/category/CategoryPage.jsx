@@ -1,13 +1,13 @@
 import GameCard from '@/components/utils/GameCard';
 import SectionTitle from '@/components/utils/SectionTitle';
 
-const HomePage = ({ games }) => {
+const CategoryPage = ({ data, category }) => {
   return (
     <>
-      <SectionTitle text='All games' />
+      <SectionTitle text={category} />
 
       <section className='grid gap-4 grid-cols-2'>
-        {games.map((game) => (
+        {data.map((game) => (
           <GameCard {...game} key={game.id} />
         ))}
       </section>
@@ -15,4 +15,4 @@ const HomePage = ({ games }) => {
   );
 };
 
-export default HomePage;
+export default CategoryPage;
