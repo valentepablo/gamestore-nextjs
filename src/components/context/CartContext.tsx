@@ -1,26 +1,30 @@
-import { createContext, Dispatch, SetStateAction, useContext, useState } from 'react';
-import { Product } from '../cart/CartContainer';
+import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from 'react';
+import { Game } from '../../interfaces/interfaces';
 
-interface CartProps {
-  cartProducts: Product[];
-  setCartProducts: Dispatch<SetStateAction<never[]>>;
+interface Props {
+  children?: ReactNode;
 }
 
-const ContextDefault: CartProps = {
-  cartProducts: [],
-  setCartProducts: () => {},
-};
+interface CartProps {
+  cartProducts: Game[];
+  setCartProducts: Dispatch<SetStateAction<Game[]>>;
+  addItemToCart: (game: Game) => void;
+}
 
-const CartContext = createContext(ContextDefault);
+const CartContext = createContext<CartProps | null>(null);
 
-export const CartContextProvider = ({ children }: any) => {
-  const [cartProducts, setCartProducts] = useState([]);
+export const CartContextProvider = ({ children }: Props) => {
+  const [cartProducts, setCartProducts] = useState<Game[]>([]);
+
+  const addItemToCart = (game: Game) => {
+    setCartProducts([...cartProducts, game]);
+  };
 
   return (
-    <CartContext.Provider value={{ cartProducts, setCartProducts }}>
+    <CartContext.Provider value={{ cartProducts, setCartProducts, addItemToCart }}>
       {children}
     </CartContext.Provider>
   );
 };
 
-export const useCartContext = () => useContext(CartContext);
+export const useCartContext = () => useContext(CartContext) as CartProps;

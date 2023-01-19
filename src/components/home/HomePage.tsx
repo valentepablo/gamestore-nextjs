@@ -1,7 +1,12 @@
 import GameCard from '../utils/GameCard';
 import SectionTitle from '../utils/SectionTitle';
+import { Game } from '../../interfaces/interfaces';
 
-const HomePage = ({ games }) => {
+interface Props {
+  games: Game[];
+}
+
+const HomePage = ({ games }: Props) => {
   return (
     <>
       <SectionTitle text='All games' />

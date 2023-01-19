@@ -1,10 +1,16 @@
 import { db } from '../../../firebase/clientApp';
 import { collection, getDocs } from 'firebase/firestore';
-
 import Head from 'next/head';
 import CategoryPage from '../../components/category/CategoryPage';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { Game } from '../../interfaces/interfaces';
 
-const Category = ({ categoryGames, category }) => {
+type Props = {
+  categoryGames: Game[];
+  category: string;
+};
+
+const Category = ({ categoryGames, category }: Props) => {
   return (
     <>
       <Head>
@@ -20,7 +26,7 @@ const Category = ({ categoryGames, category }) => {
 
 export default Category;
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const response = await getDocs(collection(db, 'categories'));
   const data = response.docs.map((doc) => doc.data());
   const paths = data.map((item) => ({
@@ -33,10 +39,10 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async (context) => {
-  const category = context.params.category;
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const category = params!.category;
   const response = await getDocs(collection(db, 'items'));
-  const data = response.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  const data = response.docs.map((doc) => ({ ...doc.data(), id: doc.id })) as Game[];
   const categoryGames = data.filter((game) => game.category === category);
 
   return {

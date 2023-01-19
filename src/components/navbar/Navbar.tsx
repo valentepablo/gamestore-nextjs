@@ -2,18 +2,28 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { db } from '../../../firebase/clientApp';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, CollectionReference, getDocs } from 'firebase/firestore';
 import { homeIcon, categoryIcons, cartIcon } from '../utils/categoryIcons';
 import { HiChevronRight } from 'react-icons/hi';
 
+type CategoryItem = {
+  categoryName: string;
+  icon: string;
+};
+
+type CategoryList = CategoryItem[];
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<CategoryList>();
 
   useEffect(() => {
     const getData = async () => {
-      const categoriesCollection = await getDocs(collection(db, 'categories'));
-      setCategories(categoriesCollection.docs.map((doc) => doc.data()));
+      const categoriesCollection = await getDocs(
+        collection(db, 'categories') as CollectionReference<CategoryItem>
+      );
+      const allCategories = categoriesCollection.docs.map((doc) => doc.data());
+      setCategories(allCategories);
     };
 
     getData();
@@ -57,14 +67,14 @@ const Navbar = () => {
               </li>
             </Link>
 
-            {categories.map((category) => (
+            {categories?.map((category) => (
               <Link
                 href={`/${category.categoryName}`}
                 onClick={() => setOpen((open) => !open)}
                 key={category.categoryName}>
                 <li className='flex items-center gap-4 py-3'>
                   <span className='p-2 text-xl bg-white rounded-lg text-[#111]'>
-                    {categoryIcons[`${category.categoryName}`]}
+                    {categoryIcons[`${category.categoryName}` as keyof typeof categoryIcons]}
                   </span>
                   <span className='text-sm font-bold tracking-wider uppercase'>
                     {category.categoryName}

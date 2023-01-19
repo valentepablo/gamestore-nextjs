@@ -1,7 +1,13 @@
+import { Game } from '../../interfaces/interfaces';
 import GameCard from '../utils/GameCard';
 import SectionTitle from '../utils/SectionTitle';
 
-const CategoryPage = ({ data, category }) => {
+interface Props {
+  data: Game[];
+  category: string;
+}
+
+const CategoryPage = ({ data, category }: Props) => {
   return (
     <>
       <SectionTitle text={category} />

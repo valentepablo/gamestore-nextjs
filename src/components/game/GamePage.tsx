@@ -1,13 +1,18 @@
 import Image from 'next/image';
-import { HiMinusSm, HiPlusSm } from 'react-icons/hi';
+// import { HiMinusSm, HiPlusSm } from 'react-icons/hi';
 import SectionTitle from '../utils/SectionTitle';
 import { useCartContext } from '../context/CartContext';
+import { Game } from '../../interfaces/interfaces';
 
-const GamePage = ({ game }) => {
-  const { cartProducts, setCartProducts } = useCartContext();
+interface Props {
+  game: Game;
+}
 
-  const addItemToCart = (game) => {
-    setCartProducts([...cartProducts, game]);
+const GamePage = ({ game }: Props) => {
+  const { addItemToCart } = useCartContext();
+
+  const handleAdd = (game: Game) => {
+    addItemToCart(game);
   };
 
   return (
@@ -43,7 +48,7 @@ const GamePage = ({ game }) => {
           <p className='text-2xl text-[#111] font-bold'>$ {game.price}</p>
         </div>
         <button
-          onClick={() => addItemToCart(game)}
+          onClick={() => handleAdd(game)}
           className='px-12 py-4 text-sm font-extrabold bg-black rounded-lg text-zinc-100'>
           Buy
         </button>

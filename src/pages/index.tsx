@@ -2,15 +2,7 @@ import { db } from '../../firebase/clientApp';
 import { collection, getDocs } from 'firebase/firestore';
 import Head from 'next/head';
 import HomePage from '../components/home/HomePage';
-
-type Game = {
-  title: string;
-  description: string;
-  category: string;
-  pictureUrl: string;
-  price: number;
-  stock: number;
-};
+import { Game } from '../interfaces/interfaces';
 
 interface Props {
   games: Game[];

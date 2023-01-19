@@ -1,16 +1,8 @@
 import Image from 'next/image';
-
-export type Product = {
-  title: string;
-  description: string;
-  pictureUrl: string;
-  price: number;
-  stock: number;
-  id: string;
-};
+import { Game } from '../../interfaces/interfaces';
 
 interface Props {
-  products: Product[];
+  products: Game[];
 }
 
 const CartContainer = ({ products }: Props) => {
