@@ -37,7 +37,7 @@ const Navbar = () => {
         <button
           className='flex items-center font-bold uppercase text-zinc-400'
           onClick={() => setOpen((open) => !open)}>
-          <span className='text-sm '>Categories</span>
+          <span className='text-sm '>Menu</span>
           <span className={`${open ? 'rotate-180' : 'rotate-0'} text-lg transition`}>
             <HiChevronRight />
           </span>
