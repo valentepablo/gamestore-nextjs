@@ -16,7 +16,7 @@ type CategoryItem = {
 type CategoryList = CategoryItem[];
 
 const variants = {
-  open: { x: 0, transition: { duration: 0.2, staggerChildren: 0.1, delayChildren: 0.2 } },
+  open: { x: 0, transition: { duration: 0.2, staggerChildren: 0.05, delayChildren: 0.2 } },
   closed: { x: -250 },
 };
 

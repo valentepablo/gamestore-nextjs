@@ -12,7 +12,7 @@ interface Props {
 }
 
 const variants = {
-  open: { x: 0, transition: { duration: 0.3, staggerChildren: 0.1, delayChildren: 0.5 } },
+  open: { x: 0, transition: { duration: 0.2, staggerChildren: 0.1, delayChildren: 0.2 } },
   closed: { x: -250 },
 };
 
