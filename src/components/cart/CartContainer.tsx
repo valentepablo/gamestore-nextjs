@@ -26,7 +26,13 @@ const CartContainer = ({ products }: Props) => {
             </div>
           ) : (
             <>
-              <p className='text-sm text-zinc-500'>You don't have any products in the cart yet.</p>
+              <p className='text-sm text-zinc-500'>
+                You don&apos;t have any{' '}
+                <Link href='/' className='font-semibold text-zinc-400'>
+                  products
+                </Link>{' '}
+                in the cart yet.
+              </p>
             </>
           )}
         </div>
