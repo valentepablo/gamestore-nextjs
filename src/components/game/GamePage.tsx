@@ -3,6 +3,7 @@ import Image from 'next/image';
 import SectionTitle from '../utils/SectionTitle';
 import { useCartContext } from '../context/CartContext';
 import { Game } from '../../interfaces/interfaces';
+import { motion } from 'framer-motion';
 
 interface Props {
   game: Game;
@@ -56,11 +57,12 @@ const GamePage = ({ game }: Props) => {
           <p className='text-xs font-semibold text-zinc-400'>{game.title}</p>
           <p className='text-2xl text-[#111] font-bold'>$ {game.price}</p>
         </div>
-        <button
+        <motion.button
+          whileFocus={{ y: 100, backgroundColor: '#111111' }}
           onClick={() => handleAdd(game)}
           className='px-12 py-4 text-sm font-extrabold bg-black rounded-lg text-zinc-100'>
-          Buy
-        </button>
+          <p>Buy</p>
+        </motion.button>
       </div>
     </section>
   );
