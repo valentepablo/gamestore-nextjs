@@ -1,53 +1,88 @@
-import Image from 'next/image';
+import { motion, MotionConfig, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 import { Game } from '../../interfaces/interfaces';
+import { useCartContext } from '../context/CartContext';
+import CartProduct from './CartProduct';
+// @ts-ignore
+import useMeasure from 'react-use-measure';
 
 interface Props {
   products: Game[];
 }
 
 const CartContainer = ({ products }: Props) => {
+  const { cartProducts } = useCartContext();
+
   return (
-    <>
-      <h2 className='mb-2 text-lg font-bold text-zinc-400'>Shopping Cart</h2>
-
-      <div className='space-y-4'>
-        {products.map((product) => (
-          <div
-            key={product.id}
-            className='flex items-center gap-4 p-4 bg-[#111] bg-opacity-60 rounded-xl'>
-            <Image
-              src={product.pictureUrl}
-              width={100}
-              height={100}
-              alt={product.title}
-              className='object-cover w-16 rounded-lg aspect-square'
-            />
-            <div>
-              <p className='text-zinc-400'>{product.title}</p>
-              <p className='font-bold text-zinc-300'>${product.price}</p>
-            </div>
-
-            <button className='ml-auto text-xs font-semibold underline text-zinc-500'>
-              Remove
-            </button>
-          </div>
-        ))}
-      </div>
-      <div className='my-6 border-t border-zinc-900'></div>
-      <h2 className='mb-2 text-lg font-bold text-zinc-400'>Payment Summary</h2>
-      <div className='p-4 bg-[#111] bg-opacity-60 rounded-xl flex items-center justify-between'>
+    <MotionConfig transition={{ duration: 0.5 }}>
+      <ResizablePanel>
+        <h2 className='mb-2 text-lg font-bold'>Shopping Cart</h2>
         <div>
-          <p>Total price:</p>
-          <p className='text-xl font-bold text-zinc-300'>
-            $ {products.reduce((prev: any, current: any) => prev + current.price, 0)}
-          </p>
+          {cartProducts.length > 0 ? (
+            <div className='space-y-4'>
+              {products.map((product) => (
+                <CartProduct key={product.id} product={product} />
+              ))}
+            </div>
+          ) : (
+            <p className='text-sm text-zinc-500'>
+              You don't have any{' '}
+              <Link href='/' className='font-semibold text-zinc-400'>
+                products
+              </Link>{' '}
+              in the cart yet.
+            </p>
+          )}
         </div>
-        <button className='px-12 py-4 text-sm font-extrabold text-[#111] bg-white rounded-lg'>
-          Pay
-        </button>
+      </ResizablePanel>
+
+      <div className='my-6 border-t border-zinc-900'></div>
+      <div>
+        <h2 className='mb-2 text-lg font-bold'>Payment Summary</h2>
+        <div className='p-4 bg-[#111] bg-opacity-60 rounded-xl flex items-center justify-between'>
+          <div>
+            <p>Total price:</p>
+            <p className='text-xl font-bold text-zinc-300'>
+              $ {products.reduce((prev: any, current: any) => prev + current.price, 0)}
+            </p>
+          </div>
+          <button
+            disabled={cartProducts.length > 0 ? false : true}
+            className='disabled:bg-zinc-600 transition duration-200 px-12 py-4 text-sm font-extrabold text-[#111] bg-white rounded-lg'>
+            Pay
+          </button>
+        </div>
       </div>
-    </>
+    </MotionConfig>
   );
 };
 
 export default CartContainer;
+
+const ResizablePanel = ({ children }: any) => {
+  const [ref, { height }] = useMeasure();
+
+  return (
+    <motion.div animate={{ height }} className='relative'>
+      <AnimatePresence initial={false}>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+          <div ref={ref} className='absolute w-full'>
+            {children}
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
+// const ignoreCircularReferences = () => {
+//   const seen = new WeakSet();
+//   return (key: any, value: any) => {
+//     if (key.startsWith('_')) return;
+//     if (typeof value === 'object' && value !== null) {
+//       if (seen.has(value)) return;
+//       seen.add(value);
+//     }
+//     return value;
+//   };
+// };

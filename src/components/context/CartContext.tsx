@@ -9,6 +9,7 @@ interface CartProps {
   cartProducts: Game[];
   setCartProducts: Dispatch<SetStateAction<Game[]>>;
   addItemToCart: (game: Game) => void;
+  removeItemFromCart: (id: string) => void;
 }
 
 const CartContext = createContext<CartProps | null>(null);
@@ -20,8 +21,13 @@ export const CartContextProvider = ({ children }: Props) => {
     setCartProducts([...cartProducts, game]);
   };
 
+  const removeItemFromCart = (id: string) => {
+    setCartProducts(cartProducts.filter((product) => product.id !== id));
+  };
+
   return (
-    <CartContext.Provider value={{ cartProducts, setCartProducts, addItemToCart }}>
+    <CartContext.Provider
+      value={{ cartProducts, setCartProducts, addItemToCart, removeItemFromCart }}>
       {children}
     </CartContext.Provider>
   );
