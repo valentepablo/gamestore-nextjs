@@ -25,13 +25,9 @@ const CartContainer = ({ products }: Props) => {
               ))}
             </div>
           ) : (
-            <p className='text-sm text-zinc-500'>
-              You don't have any{' '}
-              <Link href='/' className='font-semibold text-zinc-400'>
-                products
-              </Link>{' '}
-              in the cart yet.
-            </p>
+            <>
+              <p className='text-sm text-zinc-500'>You don't have any products in the cart yet.</p>
+            </>
           )}
         </div>
       </ResizablePanel>
@@ -74,15 +70,3 @@ const ResizablePanel = ({ children }: any) => {
     </motion.div>
   );
 };
-
-// const ignoreCircularReferences = () => {
-//   const seen = new WeakSet();
-//   return (key: any, value: any) => {
-//     if (key.startsWith('_')) return;
-//     if (typeof value === 'object' && value !== null) {
-//       if (seen.has(value)) return;
-//       seen.add(value);
-//     }
-//     return value;
-//   };
-// };
