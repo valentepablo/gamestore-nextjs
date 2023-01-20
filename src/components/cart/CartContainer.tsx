@@ -68,7 +68,7 @@ const ResizablePanel = ({ children }: any) => {
     <motion.div animate={{ height }} className='relative'>
       <AnimatePresence initial={false}>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-          <div ref={ref} className='absolute w-full'>
+          <div ref={ref} className={`${height ? 'absolute' : 'relative'} w-full`}>
             {children}
           </div>
         </motion.div>
