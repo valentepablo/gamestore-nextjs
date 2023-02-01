@@ -1,5 +1,5 @@
 import { FaFistRaised, FaCrosshairs, FaFootballBall } from 'react-icons/fa';
-import { RiSwordLine } from 'react-icons/ri';
+import { RiSwordFill } from 'react-icons/ri';
 import { GiCampfire } from 'react-icons/gi';
 import { HiHome, HiShoppingCart } from 'react-icons/hi';
 
@@ -10,6 +10,6 @@ export const categoryIcons = {
   action: <FaFistRaised />,
   shooter: <FaCrosshairs />,
   sport: <FaFootballBall />,
-  adventure: <RiSwordLine />,
+  adventure: <RiSwordFill />,
   survival: <GiCampfire />,
 };

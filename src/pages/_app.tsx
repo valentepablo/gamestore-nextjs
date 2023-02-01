@@ -19,12 +19,10 @@ export default function App({ Component, pageProps }: AppProps) {
             variants={{
               initialState: {},
               animateState: {
-                x: 0,
                 opacity: 1,
-                transition: { duration: 0.2 },
+                transition: { duration: 0.1 },
               },
               exitState: {
-                x: '120%',
                 opacity: 0,
                 transition: { duration: 0.2 },
               },
