@@ -12,7 +12,7 @@ const CategoryPage = ({ data, category }: Props) => {
     <>
       <SectionTitle text={category} />
 
-      <section className='grid grid-cols-2 gap-4'>
+      <section className='grid grid-cols-2 gap-4 lg:grid-cols-4'>
         {data.map((game) => (
           <GameCard {...game} key={game.id} />
         ))}

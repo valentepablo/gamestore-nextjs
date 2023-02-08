@@ -39,18 +39,33 @@ const Navbar = () => {
     <header>
       <nav className='flex justify-between p-4 border-b border-zinc-900'>
         <Logo />
-
+        {/* DESKTOP MENU */}
+        <ul className='items-center hidden gap-8 lg:flex'>
+          {categories?.map((category) => (
+            <Link
+              href={`/${category.categoryName}`}
+              className='text-sm font-bold tracking-wider uppercase transition hover:text-white'>
+              {category.categoryName}
+            </Link>
+          ))}
+        </ul>
+        <Link href='/cart'>
+          <button className='hidden lg:flex items-center justify-center gap-2 py-4 px-8 text-sm font-extrabold text-[#111] tracking-wider bg-white hover:bg-zinc-200 transition rounded-lg'>
+            <span className='text-lg'>{cartIcon}</span>
+            <span>Cart</span>
+          </button>
+        </Link>
+        {/* DESKTOP MENU */}
         <MenuButton open={open} setOpen={setOpen} />
-
         <div
           className={`${
             open ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
           } fixed inset-0 bg-black bg-opacity-50 transition duration-200 z-40`}
           onClick={() => setOpen((open) => !open)}></div>
-
+        {/* MOBILE MENU */}
         <div
           className={`${
-            open ? 'translate-x-0' : 'translate-x-[-600px]'
+            open ? 'translate-x-0' : 'translate-x-[-100%]'
           } fixed z-50 bg-black bottom-0 top-0 left-0 w-3/4 transition duration-500 ease-out border-r border-zinc-900`}>
           <div className='p-4 border-b border-zinc-900' onClick={() => setOpen((open) => !open)}>
             <Logo />
@@ -90,6 +105,7 @@ const Navbar = () => {
             </Link>
           </div>
         </div>
+        {/* MOBILE MENU */}
       </nav>
     </header>
   );

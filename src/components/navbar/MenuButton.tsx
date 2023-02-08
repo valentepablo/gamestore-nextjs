@@ -9,7 +9,7 @@ interface Props {
 const MenuButton = ({ open, setOpen }: Props) => {
   return (
     <button
-      className='flex items-center font-bold uppercase text-zinc-400'
+      className='flex items-center font-bold uppercase text-zinc-400 lg:hidden'
       onClick={() => setOpen((open) => !open)}>
       <span className='text-sm '>Menu</span>
       <span className={`${open ? 'rotate-180' : 'rotate-0'} text-lg transition`}>

@@ -16,7 +16,7 @@ const CartContainer = ({ products }: Props) => {
   return (
     <MotionConfig transition={{ duration: 0.5 }}>
       <ResizablePanel>
-        <h2 className='mb-2 text-lg font-bold'>Shopping Cart</h2>
+        <h2 className='mb-4 text-lg font-bold lg:text-2xl'>Shopping Cart</h2>
         <div>
           {cartProducts.length > 0 ? (
             <div className='space-y-4'>
@@ -26,7 +26,7 @@ const CartContainer = ({ products }: Props) => {
             </div>
           ) : (
             <>
-              <p className='text-sm text-zinc-500'>
+              <p className='text-sm lg:text-base text-zinc-500'>
                 You don&apos;t have any{' '}
                 <Link href='/' className='font-semibold text-zinc-400'>
                   products
@@ -38,12 +38,12 @@ const CartContainer = ({ products }: Props) => {
         </div>
       </ResizablePanel>
 
-      <div className='my-6 border-t border-zinc-900'></div>
+      <div className='my-8 border-t border-zinc-900'></div>
       <div>
-        <h2 className='mb-2 text-lg font-bold'>Payment Summary</h2>
-        <div className='p-4 bg-[#111] bg-opacity-60 rounded-xl flex items-center justify-between'>
+        <h2 className='mb-4 text-lg font-bold lg:text-2xl'>Payment Summary</h2>
+        <div className='p-4 bg-[#111] rounded-xl flex items-center justify-between'>
           <div>
-            <p>Total price:</p>
+            <p className='text-lg'>Total price:</p>
             <p className='text-xl font-bold text-zinc-300'>
               $ {products.reduce((prev: any, current: any) => prev + current.price, 0)}
             </p>

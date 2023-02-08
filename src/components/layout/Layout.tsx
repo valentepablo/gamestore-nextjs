@@ -11,7 +11,7 @@ const Layout = ({ children }: Props) => {
   return (
     <div className={nunito.className}>
       <Navbar />
-      <main className='max-w-5xl p-4 mx-auto'>{children}</main>
+      <main className='max-w-5xl p-4 mx-auto lg:py-8'>{children}</main>
     </div>
   );
 };

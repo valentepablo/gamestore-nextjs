@@ -11,7 +11,7 @@ const HomePage = ({ games }: Props) => {
     <>
       <SectionTitle text='All games' />
 
-      <section className='grid grid-cols-2 gap-4'>
+      <section className='grid grid-cols-2 gap-4 lg:grid-cols-4'>
         {games.map((game) => (
           <GameCard {...game} key={game.id} />
         ))}
