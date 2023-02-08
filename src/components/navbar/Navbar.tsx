@@ -43,6 +43,7 @@ const Navbar = () => {
         <ul className='items-center hidden gap-8 lg:flex'>
           {categories?.map((category) => (
             <Link
+              key={category.categoryName}
               href={`/${category.categoryName}`}
               className='text-sm font-bold tracking-wider uppercase transition hover:text-white'>
               {category.categoryName}
